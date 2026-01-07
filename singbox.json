@@ -1,0 +1,342 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "error",
+    "timestamp": true
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://gh-proxy.org/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "🎯 全球直连",
+      "secret": "",
+      "default_mode": "rule",
+      "access_control_allow_origin": "*",
+      "access_control_allow_private_network": false
+    },
+    "cache_file": {
+      "enabled": true,
+      "store_rdrc": true
+    }
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "ProxyDNS",
+        "type": "https",
+        "server": "cloudflare-dns.com",
+        "domain_resolver": "AliDNS",
+        "detour": "🚀 节点选择"
+      },
+      {
+        "tag": "DirectDNS",
+        "type": "https",
+        "server": "dns.alidns.com",
+        "domain_resolver": "AliDNS"
+      },
+      {
+        "tag": "AliDNS",
+        "type": "udp",
+        "server": "223.5.5.5"
+      }
+    ],
+    "rules": [
+      {
+        "clash_mode": "direct",
+        "server": "DirectDNS"
+      },
+      {
+        "clash_mode": "global",
+        "server": "ProxyDNS"
+      },
+      {
+        "domain": [
+          "gh-proxy.com",
+          "gh-proxy.org"
+        ],
+        "server": "DirectDNS"
+      },
+      {
+        "rule_set": [
+          "GeoLocation-!CN"
+        ],
+        "server": "ProxyDNS"
+      },
+      {
+        "rule_set": [
+          "geosite-category-games@cn",
+          "GeoSite-CN"
+        ],
+        "server": "DirectDNS"
+      }
+    ],
+    "final": "ProxyDNS",
+    "strategy": "prefer_ipv4",
+    "disable_cache": false,
+    "disable_expire": false,
+    "independent_cache": true,
+    "reverse_mapping": false
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": false,
+      "stack": "system",
+      "exclude_package": [
+        "com.android.captiveportallogin"
+      ]
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "::",
+      "listen_port": 7890
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "🚀 节点选择",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "🤖 AI",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "📥 Downloader",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "🎮 Game",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "💳 PayPal",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "♻️ 中转分组",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "🚢 DK机场",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "🧦 JMS机场",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "⭕ DMIT自建",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "☁️ Azure自建",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "direct",
+      "tag": "🎯 全球直连"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "inbound": [
+          "mixed-in",
+          "tun-in"
+        ],
+        "action": "sniff"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "protocol": "dns"
+          },
+          {
+            "port": 53
+          }
+        ],
+        "action": "hijack-dns"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "downloader"
+          },
+          {
+            "rule_set": [
+              "GeoIP-CN",
+              "GeoSite-CN"
+            ],
+            "invert": true
+          }
+        ],
+        "outbound": "📥 Downloader"
+      },
+      {
+        "rule_set": "geosite-category-games@cn",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": "geosite-category-games",
+        "outbound": "🎮 Game"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "GeoSite-CN",
+          "GeoIP-CN"
+        ],
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "OpenAI",
+          "Claude",
+          "Gemini"
+        ],
+        "outbound": "🤖 AI"
+      },
+      {
+        "action": "route",
+        "rule_set": [
+          "PayPal"
+        ],
+        "outbound": "💳 PayPal"
+      }
+    ],
+    "rule_set": [
+      {
+        "tag": "downloader",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://gh-proxy.org/https://raw.githubusercontent.com/senzyo/as-gist/refs/heads/master/Rule/sing-box/downloader.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "geosite-category-games@cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games@cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "geosite-category-games",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "OpenAI",
+        "type": "remote",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d",
+        "format": "binary"
+      },
+      {
+        "tag": "Claude",
+        "type": "remote",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d",
+        "format": "binary"
+      },
+      {
+        "tag": "Gemini",
+        "type": "remote",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d",
+        "format": "binary"
+      },
+      {
+        "tag": "PayPal",
+        "type": "remote",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/paypal.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d",
+        "format": "binary"
+      },
+      {
+        "tag": "GeoSite-CN",
+        "type": "remote",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d",
+        "format": "binary"
+      },
+      {
+        "tag": "GeoIP-CN",
+        "type": "remote",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d",
+        "format": "binary"
+      },
+      {
+        "tag": "GeoLocation-!CN",
+        "type": "remote",
+        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "3d",
+        "format": "binary"
+      }
+    ],
+    "auto_detect_interface": true,
+    "final": "🚀 节点选择",
+    "default_domain_resolver": {
+      "server": "DirectDNS"
+    }
+  }
+}
