@@ -64,6 +64,13 @@
         "server": "ProxyDNS"
       },
       {
+        "domain": [
+          "mc.manuscriptcentral.com",
+          "manuscriptcentral.com"
+        ],
+        "server": "ProxyDNS"
+      },
+      {
         "rule_set": [
           "geosite-category-games@cn",
           "GeoSite-CN"
@@ -225,6 +232,13 @@
       {
         "rule_set": "geosite-category-games",
         "outbound": "🎮 Game"
+      },
+      {
+        "domain": [
+          "mc.manuscriptcentral.com",
+          "manuscriptcentral.com"
+        ],
+        "outbound": "🚀 节点选择"
       },
       {
         "action": "route",
