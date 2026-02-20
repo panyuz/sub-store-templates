@@ -170,6 +170,12 @@
       "outbounds": []
     },
     {
+      "type": "selector",
+      "tag": "☁️ GCP台湾",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
       "type": "direct",
       "tag": "🎯 全球直连"
     }
