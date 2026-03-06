@@ -131,10 +131,8 @@ config.outbounds.forEach(group => {
   }
 
   // 防止策略组由于某些原因空载导致 sing-box 崩溃报错 `missing tags`
-  if (!group.outbounds || group.outbounds.length === 0) {
-    if (group.tag !== "🎯 全球直连" && group.type !== "direct") {
-      group.outbounds = ["🎯 全球直连"];
-    }
+  if (group.type !== "direct" && (!group.outbounds || group.outbounds.length === 0)) {
+    group.outbounds = ["🎯 全球直连"];
   }
 });
 
