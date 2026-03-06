@@ -176,6 +176,12 @@
       "outbounds": []
     },
     {
+      "type": "selector",
+      "tag": "🪄 魔戒机场",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
       "type": "direct",
       "tag": "🎯 全球直连"
     }
