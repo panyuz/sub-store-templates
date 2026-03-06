@@ -46,7 +46,7 @@ const azureTags = azureNodes.map(p => p.tag);
 const gcpTags = gcpNodes.map(p => p.tag);
 const mjTags = mjNodes.map(p => p.tag);
 // 提取单节点 (不含组)
-const singleNodeTags = [...dmitTags, ...azureTags, ...gcpTags, ...mjTags];
+const singleNodeTags = [...dmitTags, ...azureTags, ...gcpTags];
 
 // 7. 策略组填充
 config.outbounds.forEach(group => {
