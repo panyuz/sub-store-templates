@@ -76,14 +76,24 @@ config.outbounds.forEach(group => {
       group.outbounds.push(...dkTags, ...jmsTags, ...azureTags, ...mjTags);
       break;
 
-    case "💳 PayPal":
+    case "� 落地分组":
+      // 包含 DMIT自建, JMS机场, Azure自建
+      group.outbounds.push(
+        "⭕ DMIT自建",
+        "🧦 JMS机场",
+        "☁️ Azure自建"
+      );
+      break;
+
+    case "�💳 PayPal":
       // 包含 DMIT, JMS, 直连
       group.outbounds.push(...dmitTags, ...jmsTags, "🎯 全球直连");
       break;
 
     case "🚀 节点选择":
-      // 包含 所有的策略组 + 单节点
+      // 包含 所有的策略组 + 落地分组 + 单节点
       group.outbounds.push(
+        "🛬 落地分组",
         "🚢 DK机场",
         "🧦 JMS机场",
         "☁️ Azure自建",
