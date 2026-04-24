@@ -96,10 +96,7 @@
       "auto_route": true,
       "strict_route": true,
       "endpoint_independent_nat": false,
-      "stack": "system",
-      "exclude_package": [
-        "com.android.captiveportallogin"
-      ]
+      "stack": "system"
     },
     {
       "type": "mixed",
@@ -142,6 +139,12 @@
     {
       "type": "selector",
       "tag": "♻️ 中转分组",
+      "interrupt_exist_connections": true,
+      "outbounds": []
+    },
+    {
+      "type": "selector",
+      "tag": "🛬 落地分组",
       "interrupt_exist_connections": true,
       "outbounds": []
     },

@@ -60,7 +60,7 @@ config.outbounds.forEach(group => {
       group.outbounds.push(...jmsTags, ...azureTags, ...mjTags);
       break;
 
-    case "� 落地分组":
+    case "🛬 落地分组":
       // 包含 DMIT自建, JMS机场, Azure自建
       group.outbounds.push(
         "⭕ DMIT自建",
@@ -69,7 +69,7 @@ config.outbounds.forEach(group => {
       );
       break;
 
-    case "�💳 PayPal":
+    case "💳 PayPal":
       // 包含 DMIT, JMS, 直连
       group.outbounds.push(...dmitTags, ...jmsTags, "🎯 全球直连");
       break;
