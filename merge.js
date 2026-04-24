@@ -12,21 +12,13 @@ let proxies = await produceArtifact({
 });
 
 // 3. 节点分类
-const dkNodes = proxies.filter(p => /🚢/.test(p.tag));
 const jmsNodes = proxies.filter(p => /🧦/.test(p.tag));
 const dmitNodes = proxies.filter(p => /⭕/.test(p.tag));
 const azureNodes = proxies.filter(p => /azure/i.test(p.tag));
-const gcpNodes = proxies.filter(p => (p.subName && p.subName.includes('GCP')) || /GCP/i.test(p.tag));
 const mjNodes = proxies.filter(p => /魔戒/.test(p.tag));
 
-// 4. 处理链式代理：DMIT SS 和 GCP SS -> 中转
+// 4. 处理链式代理：DMIT SS -> 中转
 dmitNodes.forEach(node => {
-  if (node.type === 'shadowsocks') {
-    node.detour = "♻️ 中转分组";
-  }
-});
-
-gcpNodes.forEach(node => {
   if (node.type === 'shadowsocks') {
     node.detour = "♻️ 中转分组";
   }
@@ -34,26 +26,21 @@ gcpNodes.forEach(node => {
 
 // 5. 注入节点到 Outbounds
 const existingTags = config.outbounds.map(o => o.tag);
-const allNewProxies = [...dkNodes, ...jmsNodes, ...dmitNodes, ...azureNodes, ...gcpNodes, ...mjNodes];
+const allNewProxies = [...jmsNodes, ...dmitNodes, ...azureNodes, ...mjNodes];
 const uniqueProxies = allNewProxies.filter(p => !existingTags.includes(p.tag));
 config.outbounds.push(...uniqueProxies);
 
 // 6. 提取 Tag 列表
-const dkTags = dkNodes.map(p => p.tag);
 const jmsTags = jmsNodes.map(p => p.tag);
 const dmitTags = dmitNodes.map(p => p.tag);
 const azureTags = azureNodes.map(p => p.tag);
-const gcpTags = gcpNodes.map(p => p.tag);
 const mjTags = mjNodes.map(p => p.tag);
 // 提取单节点 (不含组)
-const singleNodeTags = [...dmitTags, ...azureTags, ...gcpTags];
+const singleNodeTags = [...dmitTags, ...azureTags];
 
 // 7. 策略组填充
 config.outbounds.forEach(group => {
   switch (group.tag) {
-    case "🚢 DK机场":
-      group.outbounds.push(...dkTags);
-      break;
     case "🧦 JMS机场":
       group.outbounds.push(...jmsTags);
       break;
@@ -63,17 +50,14 @@ config.outbounds.forEach(group => {
     case "☁️ Azure自建":
       group.outbounds.push(...azureTags);
       break;
-    case "☁️ GCP台湾":
-      group.outbounds.push(...gcpTags);
-      break;
 
     case "🪄 魔戒机场":
       group.outbounds.push(...mjTags);
       break;
 
     case "♻️ 中转分组":
-      // 包含 DK, JMS, Azure, 魔戒的所有节点
-      group.outbounds.push(...dkTags, ...jmsTags, ...azureTags, ...mjTags);
+      // 包含 JMS, Azure, 魔戒的所有节点
+      group.outbounds.push(...jmsTags, ...azureTags, ...mjTags);
       break;
 
     case "� 落地分组":
@@ -94,10 +78,8 @@ config.outbounds.forEach(group => {
       // 包含 所有的策略组 + 落地分组 + 单节点
       group.outbounds.push(
         "🛬 落地分组",
-        "🚢 DK机场",
         "🧦 JMS机场",
         "☁️ Azure自建",
-        "☁️ GCP台湾",
         "⭕ DMIT自建",
         "🪄 魔戒机场",
         ...singleNodeTags
@@ -107,10 +89,8 @@ config.outbounds.forEach(group => {
     case "🤖 AI":
       // 包含 所有的策略组 + 单节点 + 节点选择
       group.outbounds.push(
-        "🚢 DK机场",
         "🧦 JMS机场",
         "☁️ Azure自建",
-        "☁️ GCP台湾",
         "⭕ DMIT自建",
         "🪄 魔戒机场",
         ...singleNodeTags,
@@ -126,7 +106,6 @@ config.outbounds.forEach(group => {
         "🚀 节点选择",
         "⭕ DMIT自建",
         "☁️ Azure自建",
-        "☁️ GCP台湾",
         "🧦 JMS机场",
         "🪄 魔戒机场"
       );

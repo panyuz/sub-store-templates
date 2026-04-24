@@ -154,12 +154,6 @@
     },
     {
       "type": "selector",
-      "tag": "🚢 DK机场",
-      "interrupt_exist_connections": true,
-      "outbounds": []
-    },
-    {
-      "type": "selector",
       "tag": "🧦 JMS机场",
       "interrupt_exist_connections": true,
       "outbounds": []
@@ -173,12 +167,6 @@
     {
       "type": "selector",
       "tag": "☁️ Azure自建",
-      "interrupt_exist_connections": true,
-      "outbounds": []
-    },
-    {
-      "type": "selector",
-      "tag": "☁️ GCP台湾",
       "interrupt_exist_connections": true,
       "outbounds": []
     },
