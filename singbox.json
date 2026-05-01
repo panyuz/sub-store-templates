@@ -8,8 +8,8 @@
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
-      "external_ui_download_url": "https://gh-proxy.org/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
-      "external_ui_download_detour": "🎯 全球直连",
+      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "🚀 节点选择",
       "secret": "",
       "default_mode": "rule",
       "access_control_allow_origin": "*",
@@ -49,13 +49,6 @@
       {
         "clash_mode": "global",
         "server": "ProxyDNS"
-      },
-      {
-        "domain": [
-          "gh-proxy.com",
-          "gh-proxy.org"
-        ],
-        "server": "DirectDNS"
       },
       {
         "rule_set": [
@@ -110,67 +103,110 @@
       "type": "selector",
       "tag": "🚀 节点选择",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "♻️ 中转分组",
+        "🛬 落地分组",
+        "🧦 JMS机场",
+        "⭕ DMIT自建",
+        "☁️ Azure自建",
+        "🪄 魔戒机场",
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "🤖 AI",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🚀 节点选择",
+      "outbounds": [
+        "🚀 节点选择",
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "📥 Downloader",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连",
+        "🚀 节点选择"
+      ]
     },
     {
       "type": "selector",
       "tag": "🎮 Game",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连",
+        "🚀 节点选择"
+      ]
     },
     {
       "type": "selector",
       "tag": "💳 PayPal",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🚀 节点选择",
+      "outbounds": [
+        "🚀 节点选择",
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "♻️ 中转分组",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "🛬 落地分组",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "🧦 JMS机场",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "⭕ DMIT自建",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "☁️ Azure自建",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "🪄 魔戒机场",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "direct",
@@ -210,6 +246,12 @@
       {
         "clash_mode": "global",
         "outbound": "🚀 节点选择"
+      },
+      {
+        "protocol": [
+          "bittorrent"
+        ],
+        "outbound": "🎯 全球直连"
       },
       {
         "type": "logical",
@@ -273,79 +315,79 @@
         "tag": "downloader",
         "type": "remote",
         "format": "binary",
-        "url": "https://gh-proxy.org/https://raw.githubusercontent.com/senzyo/as-gist/refs/heads/master/Rule/sing-box/downloader.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/senzyo/as-gist/refs/heads/master/Rule/sing-box/downloader.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d"
       },
       {
         "tag": "geosite-category-games@cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games@cn.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games@cn.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d"
       },
       {
         "tag": "geosite-category-games",
         "type": "remote",
         "format": "binary",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d"
       },
       {
         "tag": "OpenAI",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d",
         "format": "binary"
       },
       {
         "tag": "Claude",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d",
         "format": "binary"
       },
       {
         "tag": "Gemini",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d",
         "format": "binary"
       },
       {
         "tag": "PayPal",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/paypal.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/paypal.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d",
         "format": "binary"
       },
       {
         "tag": "GeoSite-CN",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d",
         "format": "binary"
       },
       {
         "tag": "GeoIP-CN",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d",
         "format": "binary"
       },
       {
         "tag": "GeoLocation-!CN",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d",
         "format": "binary"
       }

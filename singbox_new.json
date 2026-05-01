@@ -8,8 +8,8 @@
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
-      "external_ui_download_url": "https://gh-proxy.org/https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
-      "external_ui_download_detour": "🎯 全球直连",
+      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip",
+      "external_ui_download_detour": "🚀 节点选择",
       "secret": "",
       "default_mode": "rule",
       "access_control_allow_origin": "*",
@@ -23,22 +23,63 @@
   "dns": {
     "servers": [
       {
-        "tag": "ProxyDNS",
-        "type": "https",
-        "server": "cloudflare-dns.com",
-        "domain_resolver": "AliDNS",
-        "detour": "🚀 节点选择"
+        "tag": "dns_hosts",
+        "type": "hosts",
+        "predefined": {
+          "dns.alidns.com": [
+            "223.5.5.5",
+            "223.6.6.6",
+            "2400:3200::1",
+            "2400:3200:baba::1"
+          ],
+          "doh.pub": [
+            "1.12.12.12",
+            "120.53.53.53",
+            "2402:4e00::"
+          ],
+          "dns.google": [
+            "8.8.8.8",
+            "8.8.4.4",
+            "2001:4860:4860::8888",
+            "2001:4860:4860::8844"
+          ],
+          "cloudflare-dns.com": [
+            "1.1.1.1",
+            "1.0.0.1",
+            "2606:4700:4700::1111",
+            "2606:4700:4700::1001"
+          ]
+        }
+      },
+      {
+        "tag": "dns_resolver",
+        "type": "local"
       },
       {
         "tag": "DirectDNS",
-        "type": "https",
+        "type": "quic",
         "server": "dns.alidns.com",
-        "domain_resolver": "AliDNS"
+        "domain_resolver": "dns_hosts"
       },
       {
-        "tag": "AliDNS",
-        "type": "udp",
-        "server": "223.5.5.5"
+        "tag": "DirectDNS_Fallback",
+        "type": "https",
+        "server": "doh.pub",
+        "domain_resolver": "dns_hosts"
+      },
+      {
+        "tag": "ProxyDNS",
+        "type": "https",
+        "server": "dns.google",
+        "domain_resolver": "dns_hosts",
+        "detour": "🚀 节点选择"
+      },
+      {
+        "tag": "ProxyDNS_Fallback",
+        "type": "https",
+        "server": "cloudflare-dns.com",
+        "domain_resolver": "dns_hosts",
+        "detour": "🚀 节点选择"
       }
     ],
     "rules": [
@@ -51,31 +92,64 @@
         "server": "ProxyDNS"
       },
       {
-        "domain": [
-          "gh-proxy.com",
-          "gh-proxy.org"
+        "domain_suffix": [
+          "lan",
+          "local"
         ],
-        "server": "DirectDNS"
+        "server": "dns_resolver"
       },
       {
         "rule_set": [
-          "GeoLocation-!CN"
+          "private"
         ],
-        "server": "ProxyDNS"
+        "server": "dns_resolver"
+      },
+      {
+        "rule_set": [
+          "ads"
+        ],
+        "action": "predefined"
+      },
+      {
+        "rule_set": [
+          "microsoft-cn",
+          "apple-cn",
+          "google-cn",
+          "games-cn",
+          "cn"
+        ],
+        "server": "DirectDNS"
       },
       {
         "domain": [
           "mc.manuscriptcentral.com",
           "manuscriptcentral.com"
         ],
-        "server": "ProxyDNS"
+        "server": "DirectDNS_Fallback"
       },
       {
         "rule_set": [
-          "geosite-category-games@cn",
-          "GeoSite-CN"
+          "games",
+          "ai",
+          "downloader",
+          "proxy",
+          "OpenAI",
+          "Claude",
+          "Gemini",
+          "PayPal"
         ],
-        "server": "DirectDNS"
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "server": "ProxyDNS"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "server": "ProxyDNS_Fallback"
       }
     ],
     "final": "ProxyDNS",
@@ -83,7 +157,7 @@
     "disable_cache": false,
     "disable_expire": false,
     "independent_cache": true,
-    "reverse_mapping": false
+    "reverse_mapping": true
   },
 
   "inbounds": [
@@ -111,67 +185,110 @@
       "type": "selector",
       "tag": "🚀 节点选择",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "♻️ 中转分组",
+        "🛬 落地分组",
+        "🧦 JMS机场",
+        "⭕ DMIT自建",
+        "☁️ Azure自建",
+        "🪄 魔戒机场",
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "🤖 AI",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🚀 节点选择",
+      "outbounds": [
+        "🚀 节点选择",
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "📥 Downloader",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连",
+        "🚀 节点选择"
+      ]
     },
     {
       "type": "selector",
       "tag": "🎮 Game",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连",
+        "🚀 节点选择"
+      ]
     },
     {
       "type": "selector",
       "tag": "💳 PayPal",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🚀 节点选择",
+      "outbounds": [
+        "🚀 节点选择",
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "♻️ 中转分组",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "🛬 落地分组",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "🧦 JMS机场",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "⭕ DMIT自建",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "☁️ Azure自建",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "selector",
       "tag": "🪄 魔戒机场",
       "interrupt_exist_connections": true,
-      "outbounds": []
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
     },
     {
       "type": "direct",
@@ -214,29 +331,44 @@
         "outbound": "🚀 节点选择"
       },
       {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "rule_set": "downloader"
-          },
-          {
-            "rule_set": [
-              "GeoIP-CN",
-              "GeoSite-CN"
-            ],
-            "invert": true
-          }
+        "protocol": [
+          "bittorrent"
         ],
-        "outbound": "📥 Downloader"
-      },
-      {
-        "rule_set": "geosite-category-games@cn",
         "outbound": "🎯 全球直连"
       },
       {
-        "rule_set": "geosite-category-games",
+        "rule_set": [
+          "private"
+        ],
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": [
+          "ads"
+        ],
+        "action": "reject"
+      },
+      {
+        "rule_set": [
+          "microsoft-cn",
+          "apple-cn",
+          "google-cn",
+          "games-cn",
+          "cn"
+        ],
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": [
+          "games"
+        ],
         "outbound": "🎮 Game"
+      },
+      {
+        "rule_set": [
+          "downloader"
+        ],
+        "outbound": "📥 Downloader"
       },
       {
         "domain": [
@@ -246,110 +378,173 @@
         "outbound": "🚀 节点选择"
       },
       {
-        "action": "route",
-        "rule_set": [
-          "GeoSite-CN",
-          "GeoIP-CN"
-        ],
-        "outbound": "🎯 全球直连"
-      },
-      {
-        "action": "route",
         "rule_set": [
           "OpenAI",
           "Claude",
-          "Gemini"
+          "Gemini",
+          "ai"
         ],
         "outbound": "🤖 AI"
       },
       {
-        "action": "route",
         "rule_set": [
           "PayPal"
         ],
         "outbound": "💳 PayPal"
+      },
+      {
+        "rule_set": [
+          "proxy"
+        ],
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "action": "resolve"
+      },
+      {
+        "rule_set": [
+          "privateip",
+          "cnip"
+        ],
+        "outbound": "🎯 全球直连"
       }
     ],
     "rule_set": [
       {
+        "tag": "ads",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ads.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "private",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/private.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "microsoft-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/microsoft-cn.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "apple-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/apple-cn.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "google-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/google-cn.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "games-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/games-cn.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "games",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/games.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "ai",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/ai.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "proxy",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/proxy.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cn.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "privateip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/privateip.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
+        "tag": "cnip",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/DustinWin/ruleset_geodata/releases/download/sing-box-ruleset/cnip.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
+      },
+      {
         "tag": "downloader",
         "type": "remote",
         "format": "binary",
-        "url": "https://gh-proxy.org/https://raw.githubusercontent.com/senzyo/as-gist/refs/heads/master/Rule/sing-box/downloader.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
-      },
-      {
-        "tag": "geosite-category-games@cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games@cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
-      },
-      {
-        "tag": "geosite-category-games",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games.srs",
-        "download_detour": "🎯 全球直连",
+        "url": "https://raw.githubusercontent.com/senzyo/as-gist/refs/heads/master/Rule/sing-box/downloader.srs",
+        "download_detour": "🚀 节点选择",
         "update_interval": "3d"
       },
       {
         "tag": "OpenAI",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d",
-        "format": "binary"
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
       },
       {
         "tag": "Claude",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d",
-        "format": "binary"
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
       },
       {
         "tag": "Gemini",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d",
-        "format": "binary"
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
       },
       {
         "tag": "PayPal",
         "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/paypal.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d",
-        "format": "binary"
-      },
-      {
-        "tag": "GeoSite-CN",
-        "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d",
-        "format": "binary"
-      },
-      {
-        "tag": "GeoIP-CN",
-        "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geoip/cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d",
-        "format": "binary"
-      },
-      {
-        "tag": "GeoLocation-!CN",
-        "type": "remote",
-        "url": "https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "3d",
-        "format": "binary"
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/paypal.srs",
+        "download_detour": "🚀 节点选择",
+        "update_interval": "3d"
       }
     ],
     "auto_detect_interface": true,
