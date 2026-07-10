@@ -305,97 +305,97 @@
         "type": "remote",
         "tag": "ads",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-ads@ads.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ads.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "private",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/private.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/private.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "cn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/cn.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "microsoft-cn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/microsoft@cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/microsoft-cn.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "apple-cn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/apple-cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/apple-cn.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "google-cn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/google-cn.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "games-cn",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games@cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/games-cn.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "games",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-games.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/games.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "ai",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/category-ai-chat-!cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ai.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "proxy",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/geolocation-!cn.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/proxy.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "gfw",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/gfw.srs",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/gfw.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "fakeip-filter",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/DustinWin/ruleset_geodata/sing-box-ruleset/fakeip-filter.srs",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/fakeip-filter.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
@@ -403,39 +403,39 @@
         "format": "binary",
         "url": "https://raw.githubusercontent.com/senzyo/as-gist/refs/heads/master/Rule/sing-box/downloader.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "OpenAI",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/openai.srs",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "Claude",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/anthropic.srs",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/anthropic.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "Gemini",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/google-gemini.srs",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google-gemini.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       },
       {
         "type": "remote",
         "tag": "PayPal",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/sing/geo/geosite/paypal.srs",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/paypal.srs",
         "download_detour": "🎯 全球直连",
-        "update_interval": "3d"
+        "update_interval": "48h"
       }
     ],
     "final": "🚀 节点选择",
