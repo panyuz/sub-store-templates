@@ -90,14 +90,9 @@
       "type": "selector",
       "tag": "🚀 节点选择",
       "interrupt_exist_connections": true,
-      "default": "♻️ 中转分组",
+      "default": "🎯 全球直连",
       "outbounds": [
-        "♻️ 中转分组",
         "🛬 落地分组",
-        "🧦 JMS机场",
-        "⭕ DMIT自建",
-        "☁️ Azure自建",
-        "🪄 魔戒机场",
         "🎯 全球直连"
       ]
     },
