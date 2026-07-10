@@ -24,7 +24,7 @@
     ],
     "rules": [
       {
-        "rule_set": ["cn", "private"],
+        "rule_set": ["cn", "private", "microsoft-cn", "apple-cn", "google-cn", "games-cn", "networktest"],
         "server": "local"
       },
       {
@@ -40,7 +40,7 @@
         "action": "reject"
       },
       {
-        "rule_set": ["proxy", "games", "ai", "gfw", "PayPal"],
+        "rule_set": ["proxy", "games", "ai", "gfw", "PayPal", "OpenAI", "Claude", "Gemini"],
         "server": "fakeip",
         "rewrite_ttl": 300
       },
@@ -213,12 +213,16 @@
         "action": "reject"
       },
       {
-        "rule_set": ["proxy", "gfw", "ai"],
+        "rule_set": ["proxy", "gfw", "ai", "OpenAI", "Claude", "Gemini"],
         "outbound": "🚀 节点选择"
       },
       {
         "rule_set": "games",
         "outbound": "🎮 Game"
+      },
+      {
+        "rule_set": "downloader",
+        "outbound": "📥 Downloader"
       },
       {
         "rule_set": "PayPal",
@@ -239,7 +243,7 @@
         "action": "resolve"
       },
       {
-        "rule_set": ["private", "cn"],
+        "rule_set": ["private", "cn", "microsoft-cn", "apple-cn", "google-cn", "games-cn", "networktest"],
         "outbound": "🎯 全球直连"
       },
       {
@@ -315,6 +319,69 @@
         "type": "remote",
         "tag": "PayPal",
         "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/paypal.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "microsoft-cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/microsoft-cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "apple-cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/apple-cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "google-cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/google-cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "games-cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/games-cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "networktest",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/networktest.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "OpenAI",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "Claude",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/anthropic.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "Gemini",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google-gemini.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "downloader",
+        "url": "https://raw.githubusercontent.com/senzyo/as-gist/refs/heads/master/Rule/sing-box/downloader.srs",
         "download_detour": "🎯 全球直连",
         "update_interval": "48h"
       }
