@@ -213,30 +213,30 @@
         "action": "reject"
       },
       {
-        "rule_set": ["proxy", "gfw"],
-        "outbound": "🚀 节点选择"
-      },
-      {
         "rule_set": ["ai", "OpenAI", "Claude", "Gemini"],
         "outbound": "🤖 AI"
-      },
-      {
-        "rule_set": "games",
-        "outbound": "🎮 Game"
-      },
-      {
-        "rule_set": "downloader",
-        "outbound": "📥 Downloader"
       },
       {
         "rule_set": "PayPal",
         "outbound": "💳 PayPal"
       },
       {
+        "rule_set": "downloader",
+        "outbound": "📥 Downloader"
+      },
+      {
+        "rule_set": "games",
+        "outbound": "🎮 Game"
+      },
+      {
         "domain": [
           "mc.manuscriptcentral.com",
           "manuscriptcentral.com"
         ],
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": ["proxy", "gfw"],
         "outbound": "🚀 节点选择"
       },
       {
