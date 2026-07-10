@@ -40,11 +40,6 @@
         "action": "reject"
       },
       {
-        "query_type": ["A", "AAAA"],
-        "invert": true,
-        "action": "reject"
-      },
-      {
         "rule_set": ["proxy", "games", "ai", "gfw", "PayPal"],
         "server": "fakeip",
         "rewrite_ttl": 300
