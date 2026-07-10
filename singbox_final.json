@@ -1,0 +1,478 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "type": "local",
+        "tag": "local"
+      },
+      {
+        "type": "fakeip",
+        "tag": "fakeip",
+        "inet4_range": "198.18.0.0/15"
+      },
+      {
+        "type": "https",
+        "tag": "ggdns",
+        "detour": "🚀 节点选择",
+        "domain_resolver": "local",
+        "server": "dns.google"
+      }
+    ],
+    "rules": [
+      {
+        "rule_set": [
+          "cn",
+          "private",
+          "microsoft-cn",
+          "apple-cn",
+          "google-cn",
+          "games-cn",
+          "networktest"
+        ],
+        "server": "local"
+      },
+      {
+        "rule_set": [
+          "ads"
+        ],
+        "action": "reject"
+      },
+      {
+        "ip_version": 6,
+        "action": "reject"
+      },
+      {
+        "query_type": [
+          "SVCB",
+          "HTTPS",
+          "PTR"
+        ],
+        "action": "reject"
+      },
+      {
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
+        "invert": true,
+        "action": "reject"
+      },
+      {
+        "rule_set": [
+          "proxy",
+          "games",
+          "ai",
+          "gfw"
+        ],
+        "server": "fakeip",
+        "rewrite_ttl": 300
+      },
+      {
+        "rule_set": "fakeip-filter",
+        "server": "local"
+      },
+      {
+        "clash_mode": "direct",
+        "server": "local"
+      },
+      {
+        "clash_mode": "global",
+        "server": "fakeip"
+      }
+    ],
+    "final": "ggdns",
+    "strategy": "ipv4_only",
+    "reverse_mapping": true,
+    "cache_capacity": 65536
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "mtu": 1500,
+      "address": [
+        "172.18.0.1/30"
+      ],
+      "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": true,
+      "stack": "mixed"
+    },
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 7890
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "🚀 节点选择",
+      "interrupt_exist_connections": true,
+      "default": "♻️ 中转分组",
+      "outbounds": [
+        "♻️ 中转分组",
+        "🛬 落地分组",
+        "🧦 JMS机场",
+        "⭕ DMIT自建",
+        "☁️ Azure自建",
+        "🪄 魔戒机场",
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🤖 AI",
+      "interrupt_exist_connections": true,
+      "default": "🚀 节点选择",
+      "outbounds": [
+        "🚀 节点选择",
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "📥 Downloader",
+      "interrupt_exist_connections": true,
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连",
+        "🚀 节点选择"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🎮 Game",
+      "interrupt_exist_connections": true,
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连",
+        "🚀 节点选择"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "💳 PayPal",
+      "interrupt_exist_connections": true,
+      "default": "🚀 节点选择",
+      "outbounds": [
+        "🚀 节点选择",
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "♻️ 中转分组",
+      "interrupt_exist_connections": true,
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🛬 落地分组",
+      "interrupt_exist_connections": true,
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🧦 JMS机场",
+      "interrupt_exist_connections": true,
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "⭕ DMIT自建",
+      "interrupt_exist_connections": true,
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "☁️ Azure自建",
+      "interrupt_exist_connections": true,
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "selector",
+      "tag": "🪄 魔戒机场",
+      "interrupt_exist_connections": true,
+      "default": "🎯 全球直连",
+      "outbounds": [
+        "🎯 全球直连"
+      ]
+    },
+    {
+      "type": "direct",
+      "tag": "🎯 全球直连"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "action": "sniff"
+      },
+      {
+        "type": "logical",
+        "mode": "or",
+        "rules": [
+          {
+            "port": 53
+          },
+          {
+            "protocol": "dns"
+          }
+        ],
+        "action": "hijack-dns"
+      },
+      {
+        "protocol": "quic",
+        "action": "reject"
+      },
+      {
+        "ip_version": 6,
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "port": [
+          853,
+          5353
+        ],
+        "action": "reject"
+      },
+      {
+        "ip_cidr": "198.18.0.0/15",
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": "ads",
+        "action": "reject"
+      },
+      {
+        "rule_set": [
+          "proxy",
+          "gfw",
+          "games",
+          "ai",
+          "OpenAI",
+          "Claude",
+          "Gemini"
+        ],
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": "PayPal",
+        "outbound": "💳 PayPal"
+      },
+      {
+        "domain": [
+          "mc.manuscriptcentral.com",
+          "manuscriptcentral.com"
+        ],
+        "outbound": "🚀 节点选择"
+      },
+      {
+        "protocol": [
+          "stun",
+          "dtls"
+        ],
+        "action": "reject"
+      },
+      {
+        "action": "resolve"
+      },
+      {
+        "rule_set": [
+          "private",
+          "cn",
+          "microsoft-cn",
+          "apple-cn",
+          "google-cn",
+          "games-cn",
+          "networktest"
+        ],
+        "outbound": "🎯 全球直连"
+      },
+      {
+        "rule_set": "cnip",
+        "outbound": "🎯 全球直连"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "ads",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ads.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "private",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/private.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "microsoft-cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/microsoft-cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "apple-cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/apple-cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "google-cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/google-cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "games-cn",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/games-cn.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "networktest",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/networktest.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "cnip",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/cnip.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "proxy",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/proxy.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "games",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/games.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "ai",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/ai.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "gfw",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/gfw.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "fakeip-filter",
+        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/fakeip-filter.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "OpenAI",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "Claude",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/anthropic.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "Gemini",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google-gemini.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      },
+      {
+        "type": "remote",
+        "tag": "PayPal",
+        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/paypal.srs",
+        "download_detour": "🎯 全球直连",
+        "update_interval": "48h"
+      }
+    ],
+    "final": "🚀 节点选择",
+    "find_process": true,
+    "auto_detect_interface": true,
+    "default_domain_resolver": "local"
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": true,
+      "store_rdrc": true
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/gh-pages.zip",
+      "external_ui_download_detour": "🚀 节点选择",
+      "secret": "",
+      "default_mode": "rule"
+    }
+  }
+}
