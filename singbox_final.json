@@ -181,11 +181,7 @@
         "action": "hijack-dns"
       },
       {
-        "protocol": "quic",
-        "action": "reject"
-      },
-      {
-        "ip_version": 6,
+        "ip_is_private": true,
         "outbound": "🎯 全球直连"
       },
       {
@@ -197,11 +193,19 @@
         "outbound": "🚀 节点选择"
       },
       {
-        "ip_is_private": true,
+        "ip_version": 6,
         "outbound": "🎯 全球直连"
       },
       {
+        "protocol": "quic",
+        "action": "reject"
+      },
+      {
         "port": [853, 5353],
+        "action": "reject"
+      },
+      {
+        "protocol": ["stun", "dtls"],
         "action": "reject"
       },
       {
@@ -221,12 +225,12 @@
         "outbound": "💳 PayPal"
       },
       {
-        "rule_set": "downloader",
-        "outbound": "📥 Downloader"
-      },
-      {
         "rule_set": "games",
         "outbound": "🎮 Game"
+      },
+      {
+        "rule_set": "downloader",
+        "outbound": "📥 Downloader"
       },
       {
         "domain": [
@@ -238,10 +242,6 @@
       {
         "rule_set": ["proxy", "gfw"],
         "outbound": "🚀 节点选择"
-      },
-      {
-        "protocol": ["stun", "dtls"],
-        "action": "reject"
       },
       {
         "action": "resolve"
