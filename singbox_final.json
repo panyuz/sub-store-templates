@@ -24,21 +24,11 @@
     ],
     "rules": [
       {
-        "rule_set": [
-          "cn",
-          "private",
-          "microsoft-cn",
-          "apple-cn",
-          "google-cn",
-          "games-cn",
-          "networktest"
-        ],
+        "rule_set": ["cn", "private"],
         "server": "local"
       },
       {
-        "rule_set": [
-          "ads"
-        ],
+        "rule_set": ["ads"],
         "action": "reject"
       },
       {
@@ -46,28 +36,16 @@
         "action": "reject"
       },
       {
-        "query_type": [
-          "SVCB",
-          "HTTPS",
-          "PTR"
-        ],
+        "query_type": ["SVCB", "HTTPS", "PTR"],
         "action": "reject"
       },
       {
-        "query_type": [
-          "A",
-          "AAAA"
-        ],
+        "query_type": ["A", "AAAA"],
         "invert": true,
         "action": "reject"
       },
       {
-        "rule_set": [
-          "proxy",
-          "games",
-          "ai",
-          "gfw"
-        ],
+        "rule_set": ["proxy", "games", "ai", "gfw", "PayPal"],
         "server": "fakeip",
         "rewrite_ttl": 300
       },
@@ -94,9 +72,7 @@
       "type": "tun",
       "tag": "tun-in",
       "mtu": 1500,
-      "address": [
-        "172.18.0.1/30"
-      ],
+      "address": ["172.18.0.1/30"],
       "auto_route": true,
       "strict_route": true,
       "endpoint_independent_nat": true,
@@ -130,94 +106,70 @@
       "tag": "🤖 AI",
       "interrupt_exist_connections": true,
       "default": "🚀 节点选择",
-      "outbounds": [
-        "🚀 节点选择",
-        "🎯 全球直连"
-      ]
+      "outbounds": ["🚀 节点选择", "🎯 全球直连"]
     },
     {
       "type": "selector",
       "tag": "📥 Downloader",
       "interrupt_exist_connections": true,
       "default": "🎯 全球直连",
-      "outbounds": [
-        "🎯 全球直连",
-        "🚀 节点选择"
-      ]
+      "outbounds": ["🎯 全球直连", "🚀 节点选择"]
     },
     {
       "type": "selector",
       "tag": "🎮 Game",
       "interrupt_exist_connections": true,
       "default": "🎯 全球直连",
-      "outbounds": [
-        "🎯 全球直连",
-        "🚀 节点选择"
-      ]
+      "outbounds": ["🎯 全球直连", "🚀 节点选择"]
     },
     {
       "type": "selector",
       "tag": "💳 PayPal",
       "interrupt_exist_connections": true,
       "default": "🚀 节点选择",
-      "outbounds": [
-        "🚀 节点选择",
-        "🎯 全球直连"
-      ]
+      "outbounds": ["🚀 节点选择", "🎯 全球直连"]
     },
     {
       "type": "selector",
       "tag": "♻️ 中转分组",
       "interrupt_exist_connections": true,
       "default": "🎯 全球直连",
-      "outbounds": [
-        "🎯 全球直连"
-      ]
+      "outbounds": ["🎯 全球直连"]
     },
     {
       "type": "selector",
       "tag": "🛬 落地分组",
       "interrupt_exist_connections": true,
       "default": "🎯 全球直连",
-      "outbounds": [
-        "🎯 全球直连"
-      ]
+      "outbounds": ["🎯 全球直连"]
     },
     {
       "type": "selector",
       "tag": "🧦 JMS机场",
       "interrupt_exist_connections": true,
       "default": "🎯 全球直连",
-      "outbounds": [
-        "🎯 全球直连"
-      ]
+      "outbounds": ["🎯 全球直连"]
     },
     {
       "type": "selector",
       "tag": "⭕ DMIT自建",
       "interrupt_exist_connections": true,
       "default": "🎯 全球直连",
-      "outbounds": [
-        "🎯 全球直连"
-      ]
+      "outbounds": ["🎯 全球直连"]
     },
     {
       "type": "selector",
       "tag": "☁️ Azure自建",
       "interrupt_exist_connections": true,
       "default": "🎯 全球直连",
-      "outbounds": [
-        "🎯 全球直连"
-      ]
+      "outbounds": ["🎯 全球直连"]
     },
     {
       "type": "selector",
       "tag": "🪄 魔戒机场",
       "interrupt_exist_connections": true,
       "default": "🎯 全球直连",
-      "outbounds": [
-        "🎯 全球直连"
-      ]
+      "outbounds": ["🎯 全球直连"]
     },
     {
       "type": "direct",
@@ -233,12 +185,8 @@
         "type": "logical",
         "mode": "or",
         "rules": [
-          {
-            "port": 53
-          },
-          {
-            "protocol": "dns"
-          }
+          { "port": 53 },
+          { "protocol": "dns" }
         ],
         "action": "hijack-dns"
       },
@@ -263,10 +211,7 @@
         "outbound": "🎯 全球直连"
       },
       {
-        "port": [
-          853,
-          5353
-        ],
+        "port": [853, 5353],
         "action": "reject"
       },
       {
@@ -278,16 +223,12 @@
         "action": "reject"
       },
       {
-        "rule_set": [
-          "proxy",
-          "gfw",
-          "games",
-          "ai",
-          "OpenAI",
-          "Claude",
-          "Gemini"
-        ],
+        "rule_set": ["proxy", "gfw", "ai"],
         "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": "games",
+        "outbound": "🎮 Game"
       },
       {
         "rule_set": "PayPal",
@@ -301,25 +242,14 @@
         "outbound": "🚀 节点选择"
       },
       {
-        "protocol": [
-          "stun",
-          "dtls"
-        ],
+        "protocol": ["stun", "dtls"],
         "action": "reject"
       },
       {
         "action": "resolve"
       },
       {
-        "rule_set": [
-          "private",
-          "cn",
-          "microsoft-cn",
-          "apple-cn",
-          "google-cn",
-          "games-cn",
-          "networktest"
-        ],
+        "rule_set": ["private", "cn"],
         "outbound": "🎯 全球直连"
       },
       {
@@ -346,41 +276,6 @@
         "type": "remote",
         "tag": "cn",
         "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "48h"
-      },
-      {
-        "type": "remote",
-        "tag": "microsoft-cn",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/microsoft-cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "48h"
-      },
-      {
-        "type": "remote",
-        "tag": "apple-cn",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/apple-cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "48h"
-      },
-      {
-        "type": "remote",
-        "tag": "google-cn",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/google-cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "48h"
-      },
-      {
-        "type": "remote",
-        "tag": "games-cn",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/games-cn.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "48h"
-      },
-      {
-        "type": "remote",
-        "tag": "networktest",
-        "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/networktest.srs",
         "download_detour": "🎯 全球直连",
         "update_interval": "48h"
       },
@@ -423,27 +318,6 @@
         "type": "remote",
         "tag": "fakeip-filter",
         "url": "https://cdn.jsdelivr.net/gh/DustinWin/ruleset_geodata@sing-box-ruleset/fakeip-filter.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "48h"
-      },
-      {
-        "type": "remote",
-        "tag": "OpenAI",
-        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/openai.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "48h"
-      },
-      {
-        "type": "remote",
-        "tag": "Claude",
-        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/anthropic.srs",
-        "download_detour": "🎯 全球直连",
-        "update_interval": "48h"
-      },
-      {
-        "type": "remote",
-        "tag": "Gemini",
-        "url": "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@sing/geo/geosite/google-gemini.srs",
         "download_detour": "🎯 全球直连",
         "update_interval": "48h"
       },

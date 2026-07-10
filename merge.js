@@ -47,6 +47,7 @@ const isDmitNode = node => /⭕|DMIT/i.test(getNodeTag(node));
 const isAzureNode = node => /azure/i.test(getNodeTag(node));
 const isMjNode = node => /魔戒|MJ/i.test(getNodeTag(node));
 const isLandingNode = node => /落地|landing|relay/i.test(getNodeTag(node));
+const isSoftbankNode = node => /JP-Softbank|Softbank|softbank/i.test(getNodeTag(node));
 
 // 4. 处理链式代理，优先把落地节点或特定单节点送入中转分组。
 proxies = proxies.map(proxy => {
@@ -77,6 +78,7 @@ const jmsTags = proxies.filter(isJmsNode).map(getNodeTag);
 const dmitTags = proxies.filter(isDmitNode).map(getNodeTag);
 const azureTags = proxies.filter(isAzureNode).map(getNodeTag);
 const mjTags = proxies.filter(isMjNode).map(getNodeTag);
+const softbankTags = proxies.filter(isSoftbankNode).map(getNodeTag);
 const terminalTags = proxies.filter(proxy => !proxy.detour).map(getNodeTag);
 const relayFrontTags = proxies
   .filter(proxy => !proxy.detour && (isJmsNode(proxy) || isAzureNode(proxy) || isMjNode(proxy)))
@@ -133,10 +135,10 @@ config.outbounds.forEach(group => {
       group.outbounds.push(
         DIRECT_TAG,
         "🛬 落地分组",
-        "🧦 JMS机场",
-        "☁️ Azure自建",
-        "⭕ DMIT自建",
-        "🪄 魔戒机场",
+        ...dmitTags,
+        ...jmsTags,
+        ...azureTags,
+        ...softbankTags,
         ...terminalTags
       );
       break;
@@ -144,10 +146,11 @@ config.outbounds.forEach(group => {
       group.outbounds.push(
         DIRECT_TAG,
         "🚀 节点选择",
-        "🧦 JMS机场",
-        "☁️ Azure自建",
-        "⭕ DMIT自建",
-        "🪄 魔戒机场",
+        "🛬 落地分组",
+        ...dmitTags,
+        ...jmsTags,
+        ...azureTags,
+        ...softbankTags,
         ...terminalTags
       );
       break;
