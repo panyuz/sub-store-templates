@@ -213,8 +213,12 @@
         "action": "reject"
       },
       {
-        "rule_set": ["proxy", "gfw", "ai", "OpenAI", "Claude", "Gemini"],
+        "rule_set": ["proxy", "gfw"],
         "outbound": "🚀 节点选择"
+      },
+      {
+        "rule_set": ["ai", "OpenAI", "Claude", "Gemini"],
+        "outbound": "🤖 AI"
       },
       {
         "rule_set": "games",
