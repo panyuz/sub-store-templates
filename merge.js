@@ -138,8 +138,7 @@ config.outbounds.forEach(group => {
         ...dmitTags,
         ...jmsTags,
         ...azureTags,
-        ...softbankTags,
-        ...terminalTags
+        ...softbankTags
       );
       break;
     case "🤖 AI":
@@ -150,8 +149,7 @@ config.outbounds.forEach(group => {
         ...dmitTags,
         ...jmsTags,
         ...azureTags,
-        ...softbankTags,
-        ...terminalTags
+        ...softbankTags
       );
       break;
     case "📥 Downloader":
