@@ -78,7 +78,9 @@ const dmitTags = proxies.filter(isDmitNode).map(getNodeTag);
 const azureTags = proxies.filter(isAzureNode).map(getNodeTag);
 const mjTags = proxies.filter(isMjNode).map(getNodeTag);
 const terminalTags = proxies.filter(proxy => !proxy.detour).map(getNodeTag);
-const relayFrontTags = [...jmsTags, ...azureTags, ...mjTags];
+const relayFrontTags = proxies
+  .filter(proxy => !proxy.detour && (isJmsNode(proxy) || isAzureNode(proxy) || isMjNode(proxy)))
+  .map(getNodeTag);
 
 const unique = list => [...new Set(list.filter(Boolean))];
 
