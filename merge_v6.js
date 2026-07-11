@@ -45,10 +45,11 @@ const isJmsNode = node => /🧦|JMS/i.test(getNodeTag(node));
 const isDmitNode = node => /⭕|DMIT/i.test(getNodeTag(node));
 const isAzureNode = node => /azure/i.test(getNodeTag(node));
 const isSoftbankNode = node => /JP-Softbank|Softbank|softbank/i.test(getNodeTag(node));
+const isMjNode = node => /魔戒|MJ/i.test(getNodeTag(node));
 
-// 4. 去重后注入所有节点
+// 4. 去除魔戒节点及重复后注入
 const existingTags = new Set(config.outbounds.map(outbound => outbound.tag));
-proxies = proxies.filter(proxy => !existingTags.has(getNodeTag(proxy)));
+proxies = proxies.filter(proxy => !existingTags.has(getNodeTag(proxy)) && !isMjNode(proxy));
 config.outbounds.push(...proxies);
 
 // 5. 提取分组所需 tag
