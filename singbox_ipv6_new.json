@@ -279,6 +279,13 @@
         "outbound": "direct"
       },
       {
+        "domain_keyword": [
+          "sagepub",
+          "manuscriptcentral"
+        ],
+        "outbound": "🚀 节点选择"
+      },
+      {
         "domain": "apps.apple.com",
         "outbound": "🚀 节点选择"
       },
@@ -351,12 +358,6 @@
         "type": "remote",
         "tag": "paypal",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/paypal.srs",
-        "download_detour": "direct"
-      },
-      {
-        "type": "remote",
-        "tag": "custom-proxy",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/panyuz/sub-store-templates/main/rulesets/custom-proxy.srs",
         "download_detour": "direct"
       }
     ],
