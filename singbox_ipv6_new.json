@@ -10,7 +10,7 @@
         "type": "https",
         "tag": "dns_proxy",
         "server": "8.8.8.8",
-        "detour": "proxy"
+        "detour": "🚀 节点选择"
       },
       {
         "type": "local",
@@ -53,27 +53,7 @@
       },
       {
         "domain_suffix": [".local", ".lan", "miwifi.com"],
-        "rule_set": ["private", "bilibili_domain", "apple_cn"],
-        "server": "local"
-      },
-      {
-        "process_name": [
-          "Microsoft Outlook",
-          "motrix-next-engine",
-          "aria2c.exe",
-          "fdm.exe",
-          "folx.exe",
-          "nettransport.exe",
-          "thunder.exe",
-          "transmission.exe",
-          "utorrent.exe",
-          "webtorrent.exe",
-          "webtorrent helper.exe",
-          "qbittorrent.exe",
-          "downloadservice.exe",
-          "weiyun.exe",
-          "baidunetdisk.exe"
-        ],
+        "rule_set": ["private", "apple_cn"],
         "server": "local"
       },
       {
@@ -101,20 +81,6 @@
         "query_type": ["A", "AAAA"],
         "rule_set": "proxy_domain",
         "server": "fakeip"
-      },
-      {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "rule_set": ["proxy_domain"],
-            "invert": true
-          },
-          {
-            "rule_set": "cn_ip"
-          }
-        ],
-        "server": "local"
       },
       {
         "query_type": ["A", "AAAA"],
@@ -152,203 +118,57 @@
   ],
   "outbounds": [
     {
-      "tag": "proxy",
+      "tag": "🚀 节点选择",
       "type": "selector",
       "outbounds": [
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "noCN-auto",
-        "all"
+        "direct"
       ]
     },
     {
-      "tag": "ai",
+      "tag": "🤖 AI",
       "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "noCN-auto",
-        "all"
-      ],
-      "default": "noCN-auto"
+      "outbounds": ["🚀 节点选择", "direct"],
+      "default": "🚀 节点选择"
     },
     {
-      "tag": "telegram",
+      "tag": "💳 PayPal",
       "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "all"
-      ]
-    },
-    {
-      "tag": "emby",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "all"
-      ]
-    },
-    {
-      "tag": "google",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "noCN-auto",
-        "all"
-      ],
-      "default": "noCN-auto"
-    },
-    {
-      "tag": "streaming",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "all"
-      ],
-      "default": "direct"
+      "outbounds": ["🚀 节点选择", "direct"],
+      "default": "🚀 节点选择"
     },
     {
       "type": "selector",
       "tag": "github",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "all"
-      ],
-      "default": "us-auto"
+      "outbounds": ["🚀 节点选择", "direct"],
+      "default": "🚀 节点选择"
     },
     {
       "type": "selector",
-      "tag": "microsoft@cn",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "all"
-      ],
-      "default": "direct"
-    },
-    {
-      "tag": "bilibili",
-      "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "all"
-      ],
+      "tag": "🪟 microsoft@cn",
+      "outbounds": ["🚀 节点选择", "direct"],
       "default": "direct"
     },
     {
       "tag": "cn",
       "type": "selector",
-      "outbounds": [
-        "proxy",
-        "direct",
-        "hk-auto",
-        "tw-auto",
-        "jp-auto",
-        "sg-auto",
-        "us-auto",
-        "all"
-      ],
+      "outbounds": ["🚀 节点选择", "direct"],
+      "default": "direct"
+    },
+    {
+      "tag": "♻️ 中转分组",
+      "type": "selector",
+      "outbounds": ["direct"],
+      "default": "direct"
+    },
+    {
+      "tag": "🛬 落地分组",
+      "type": "selector",
+      "outbounds": ["direct"],
       "default": "direct"
     },
     {
       "tag": "direct",
       "type": "direct"
-    },
-    {
-      "tag": "noCN-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "interval": "2m",
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "hk-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "interval": "2m",
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "tw-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "interval": "2m",
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "jp-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "interval": "2m",
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "sg-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "interval": "2m",
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "us-auto",
-      "type": "urltest",
-      "outbounds": [],
-      "interval": "2m",
-      "interrupt_exist_connections": true
-    },
-    {
-      "tag": "all",
-      "type": "selector",
-      "outbounds": []
     }
   ],
   "route": {
@@ -396,35 +216,11 @@
       },
       {
         "clash_mode": "Global",
-        "outbound": "all"
+        "outbound": "🚀 节点选择"
       },
       {
         "clash_mode": "Direct",
         "outbound": "direct"
-      },
-      {
-        "process_name": [
-          "Microsoft Outlook",
-          "motrix-next-engine",
-          "aria2c.exe",
-          "fdm.exe",
-          "folx.exe",
-          "nettransport.exe",
-          "thunder.exe",
-          "transmission.exe",
-          "utorrent.exe",
-          "webtorrent.exe",
-          "webtorrent helper.exe",
-          "qbittorrent.exe",
-          "downloadservice.exe",
-          "weiyun.exe",
-          "baidunetdisk.exe"
-        ],
-        "outbound": "direct"
-      },
-      {
-        "rule_set": "telegram_ip",
-        "outbound": "telegram"
       },
       {
         "rule_set": "cn_ip",
@@ -463,24 +259,11 @@
       },
       {
         "rule_set": "ai_domain",
-        "outbound": "ai"
+        "outbound": "🤖 AI"
       },
       {
-        "rule_set": "telegram_domain",
-        "outbound": "telegram"
-      },
-      {
-        "rule_set": ["youtube_domain", "netflix_domain"],
-        "outbound": "streaming"
-      },
-      {
-        "rule_set": ["google_domain", "google_ip"],
-        "outbound": "google"
-      },
-      {
-        "domain_keyword": "emby.",
-        "rule_set": "emby",
-        "outbound": "emby"
+        "rule_set": "paypal",
+        "outbound": "💳 PayPal"
       },
       {
         "rule_set": "github",
@@ -488,11 +271,7 @@
       },
       {
         "rule_set": "microsoft@cn",
-        "outbound": "microsoft@cn"
-      },
-      {
-        "rule_set": "bilibili_domain",
-        "outbound": "bilibili"
+        "outbound": "🪟 microsoft@cn"
       },
       {
         "domain": "captive.apple.com",
@@ -501,7 +280,7 @@
       },
       {
         "domain": "apps.apple.com",
-        "outbound": "proxy"
+        "outbound": "🚀 节点选择"
       },
       {
         "domain_suffix": "miwifi.com",
@@ -523,12 +302,6 @@
         "download_detour": "direct"
       },
       {
-        "tag": "bilibili_domain",
-        "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geosite/bilibili.srs",
-        "download_detour": "direct"
-      },
-      {
         "tag": "cn_ip",
         "type": "remote",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
@@ -541,24 +314,6 @@
         "download_detour": "direct"
       },
       {
-        "tag": "google_domain",
-        "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geosite/google.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "google_ip",
-        "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/google.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "netflix_domain",
-        "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geosite/netflix.srs",
-        "download_detour": "direct"
-      },
-      {
         "tag": "ai_domain",
         "type": "remote",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs",
@@ -568,24 +323,6 @@
         "tag": "proxy_domain",
         "type": "remote",
         "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "telegram_ip",
-        "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geoip/telegram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "telegram_domain",
-        "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geosite/telegram.srs",
-        "download_detour": "direct"
-      },
-      {
-        "tag": "youtube_domain",
-        "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geosite/youtube.srs",
         "download_detour": "direct"
       },
       {
@@ -608,11 +345,12 @@
       },
       {
         "type": "remote",
-        "tag": "emby",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-emby.srs",
+        "tag": "paypal",
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/paypal.srs",
         "download_detour": "direct"
       }
     ],
+    "final": "🚀 节点选择",
     "auto_detect_interface": true,
     "default_domain_resolver": "dns_direct"
   },
