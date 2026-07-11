@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "domain": [
+        "mc.manuscriptcentral.com",
+        "manuscriptcentral.com"
+      ]
+    },
+    {
+      "domain_suffix": [
+        ".sagepub.com",
+        ".sagepub.co.uk",
+        ".sagepublications.com"
+      ]
+    }
+  ]
+}
