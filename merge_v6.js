@@ -43,7 +43,7 @@ let proxies = await produceArtifact({
 const getNodeTag = node => node.tag || node.name || "";
 const isJmsNode = node => /🧦|JMS/i.test(getNodeTag(node));
 const isDmitNode = node => /⭕|DMIT/i.test(getNodeTag(node));
-const isAzureNode = node => /azure/i.test(getNodeTag(node));
+const isAzureNode = node => /azure|jpaz/i.test(getNodeTag(node));
 const isSoftbankNode = node => /JP-Softbank|Softbank|softbank/i.test(getNodeTag(node));
 const isMjNode = node => /🐐|魔戒|MJ/i.test(getNodeTag(node));
 

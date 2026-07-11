@@ -223,6 +223,10 @@
         "outbound": "direct"
       },
       {
+        "ip_cidr": "198.18.0.0/15",
+        "outbound": "🚀 节点选择"
+      },
+      {
         "rule_set": "cn_ip",
         "outbound": "cn"
       },
