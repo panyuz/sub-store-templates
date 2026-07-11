@@ -290,10 +290,6 @@
         "outbound": "🚀 节点选择"
       },
       {
-        "rule_set": "custom-proxy",
-        "outbound": "🚀 节点选择"
-      },
-      {
         "domain_suffix": "miwifi.com",
         "rule_set": ["cn_domain", "apple_cn"],
         "outbound": "cn"
