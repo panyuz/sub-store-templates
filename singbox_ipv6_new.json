@@ -103,10 +103,24 @@
         "server": "fakeip"
       },
       {
+        "rule_set": "proxy_domain",
+        "invert": true,
+        "action": "evaluate",
+        "server": "dns_proxy",
+        "client_subnet": "114.114.114.114/24"
+      },
+      {
+        "rule_set": "cn_ip",
+        "match_response": true,
+        "server": "local"
+      },
+      {
         "query_type": ["A", "AAAA"],
         "server": "fakeip"
       }
     ],
+    "final": "dns_proxy",
+    "optimistic": true,
     "independent_cache": true
   },
   "ntp": {
@@ -133,6 +147,7 @@
         }
       }
     },
+    {
       "type": "mixed",
       "listen": "127.0.0.1",
       "listen_port": 7890
@@ -221,6 +236,34 @@
         "outbound": "direct"
       },
       {
+        "network": "icmp",
+        "action": "resolve"
+      },
+      {
+        "network": "icmp",
+        "outbound": "direct"
+      },
+      {
+        "process_name": [
+          "Microsoft Outlook",
+          "motrix-next-engine",
+          "aria2c.exe",
+          "fdm.exe",
+          "folx.exe",
+          "nettransport.exe",
+          "thunder.exe",
+          "transmission.exe",
+          "utorrent.exe",
+          "webtorrent.exe",
+          "webtorrent helper.exe",
+          "qbittorrent.exe",
+          "downloadservice.exe",
+          "weiyun.exe",
+          "baidunetdisk.exe"
+        ],
+        "outbound": "direct"
+      },
+      {
         "type": "logical",
         "mode": "and",
         "rules": [
@@ -302,6 +345,10 @@
       {
         "rule_set": "microsoft@cn",
         "outbound": "🪟 microsoft@cn"
+      },
+      {
+        "domain_suffix": "omp.sh",
+        "outbound": "🚀 节点选择"
       },
       {
         "domain": "captive.apple.com",
