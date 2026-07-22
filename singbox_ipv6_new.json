@@ -57,6 +57,26 @@
         "server": "local"
       },
       {
+        "process_name": [
+          "Microsoft Outlook",
+          "motrix-next-engine",
+          "aria2c.exe",
+          "fdm.exe",
+          "folx.exe",
+          "nettransport.exe",
+          "thunder.exe",
+          "transmission.exe",
+          "utorrent.exe",
+          "webtorrent.exe",
+          "webtorrent helper.exe",
+          "qbittorrent.exe",
+          "downloadservice.exe",
+          "weiyun.exe",
+          "baidunetdisk.exe"
+        ],
+        "server": "local"
+      },
+      {
         "domain": ["ghfast.top", "cdn.jsdelivr.net"],
         "domain_suffix": [
           "tplogin.cn",
@@ -101,6 +121,7 @@
       "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
       "auto_route": true,
       "strict_route": true,
+      "endpoint_independent_nat": true,
       "route_exclude_address": ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"],
       "stack": "mixed",
       "loopback_address": ["10.7.0.1"],
@@ -112,7 +133,6 @@
         }
       }
     },
-    {
       "type": "mixed",
       "listen": "127.0.0.1",
       "listen_port": 7890
@@ -122,6 +142,7 @@
     {
       "tag": "🚀 节点选择",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": [
         "direct"
       ]
@@ -129,42 +150,49 @@
     {
       "tag": "🤖 AI",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": ["🚀 节点选择", "direct"],
       "default": "🚀 节点选择"
     },
     {
       "tag": "💳 PayPal",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": ["🚀 节点选择", "direct"],
       "default": "🚀 节点选择"
     },
     {
       "type": "selector",
       "tag": "github",
+      "interrupt_exist_connections": true,
       "outbounds": ["🚀 节点选择", "direct"],
       "default": "🚀 节点选择"
     },
     {
       "type": "selector",
       "tag": "🪟 microsoft@cn",
+      "interrupt_exist_connections": true,
       "outbounds": ["🚀 节点选择", "direct"],
       "default": "direct"
     },
     {
       "tag": "cn",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": ["🚀 节点选择", "direct"],
       "default": "direct"
     },
     {
       "tag": "♻️ 中转分组",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": ["direct"],
       "default": "direct"
     },
     {
       "tag": "🛬 落地分组",
       "type": "selector",
+      "interrupt_exist_connections": true,
       "outbounds": ["direct"],
       "default": "direct"
     },
@@ -361,6 +389,7 @@
     ],
     "final": "🚀 节点选择",
     "auto_detect_interface": true,
+    "find_process": true,
     "default_domain_resolver": "dns_direct"
   },
   "experimental": {
@@ -368,11 +397,14 @@
       "external_controller": "127.0.0.1:9090",
       "external_ui": "ClashUIforSingbox",
       "external_ui_download_url": "https://ghfast.top/https://github.com/Zephyruso/zashboard/releases/latest/download/dist-no-fonts.zip",
-      "external_ui_download_detour": "direct"
+      "external_ui_download_detour": "direct",
+      "secret": "",
+      "default_mode": "rule"
     },
     "cache_file": {
       "enabled": true,
-      "store_fakeip": true
+      "store_fakeip": true,
+      "store_rdrc": true
     }
   }
 }
