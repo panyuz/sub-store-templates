@@ -103,15 +103,17 @@
         "server": "fakeip"
       },
       {
-        "rule_set": "proxy_domain",
-        "invert": true,
-        "action": "evaluate",
-        "server": "dns_proxy",
-        "client_subnet": "114.114.114.114/24"
-      },
-      {
-        "rule_set": "cn_ip",
-        "match_response": true,
+        "type": "logical",
+        "mode": "and",
+        "rules": [
+          {
+            "rule_set": "proxy_domain",
+            "invert": true
+          },
+          {
+            "rule_set": "cn_ip"
+          }
+        ],
         "server": "local"
       },
       {
@@ -119,8 +121,6 @@
         "server": "fakeip"
       }
     ],
-    "final": "dns_proxy",
-    "optimistic": true,
     "independent_cache": true
   },
   "ntp": {
