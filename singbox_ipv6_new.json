@@ -104,17 +104,14 @@
         "server": "fakeip"
       },
       {
-        "type": "logical",
-        "mode": "and",
-        "rules": [
-          {
-            "rule_set": "proxy_domain",
-            "invert": true
-          },
-          {
-            "rule_set": "cn_ip"
-          }
-        ],
+        "rule_set": "proxy_domain",
+        "invert": true,
+        "action": "evaluate",
+        "server": "local"
+      },
+      {
+        "match_response": true,
+        "rule_set": "cn_ip",
         "server": "local"
       },
       {
@@ -207,6 +204,12 @@
     {
       "tag": "direct",
       "type": "direct"
+    }
+  ],
+  "http_clients": [
+    {
+      "tag": "direct-http",
+      "detour": "direct"
     }
   ],
   "route": {
@@ -371,68 +374,59 @@
       {
         "tag": "microsoft@cn",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/microsoft@cn.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/microsoft@cn.srs"
       },
       {
         "tag": "apple_cn",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple-cn.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/apple-cn.srs"
       },
       {
         "tag": "cn_ip",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/cn.srs"
       },
       {
         "tag": "cn_domain",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geosite/cn.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo-lite/geosite/cn.srs"
       },
       {
         "tag": "ai_domain",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ai-chat-!cn.srs"
       },
       {
         "tag": "proxy_domain",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/geolocation-!cn.srs"
       },
       {
         "tag": "ads",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ads.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ads.srs"
       },
       {
         "tag": "private",
         "type": "remote",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/private.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/private.srs"
       },
       {
         "type": "remote",
         "tag": "github",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/github.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/github.srs"
       },
       {
         "type": "remote",
         "tag": "paypal",
-        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/paypal.srs",
-        "download_detour": "direct"
+        "url": "https://ghfast.top/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/paypal.srs"
       }
     ],
     "final": "🚀 节点选择",
     "auto_detect_interface": true,
     "find_process": true,
-    "default_domain_resolver": "dns_direct"
+    "default_domain_resolver": "dns_direct",
+    "default_http_client": "direct-http"
   },
   "experimental": {
     "clash_api": {
