@@ -72,7 +72,8 @@
           "qbittorrent.exe",
           "downloadservice.exe",
           "weiyun.exe",
-          "baidunetdisk.exe"
+          "baidunetdisk.exe",
+          "outlook.exe"
         ],
         "server": "local"
       },
@@ -120,8 +121,7 @@
         "query_type": ["A", "AAAA"],
         "server": "fakeip"
       }
-    ],
-    "independent_cache": true
+    ]
   },
   "ntp": {
     "enabled": true,
@@ -138,14 +138,7 @@
       "endpoint_independent_nat": true,
       "route_exclude_address": ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"],
       "stack": "mixed",
-      "loopback_address": ["10.7.0.1"],
-      "platform": {
-        "http_proxy": {
-          "enabled": true,
-          "server": "127.0.0.1",
-          "server_port": 7890
-        }
-      }
+      "loopback_address": ["10.7.0.1"]
     },
     {
       "type": "mixed",
@@ -237,7 +230,8 @@
       },
       {
         "network": "icmp",
-        "action": "resolve"
+        "action": "resolve",
+        "server": "dns_direct"
       },
       {
         "network": "icmp",
@@ -259,7 +253,8 @@
           "qbittorrent.exe",
           "downloadservice.exe",
           "weiyun.exe",
-          "baidunetdisk.exe"
+          "baidunetdisk.exe",
+          "outlook.exe"
         ],
         "outbound": "direct"
       },
@@ -451,7 +446,7 @@
     "cache_file": {
       "enabled": true,
       "store_fakeip": true,
-      "store_rdrc": true
+      "store_dns": true
     }
   }
 }
