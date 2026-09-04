@@ -269,8 +269,7 @@
   ],
   "http_clients": [
     {
-      "tag": "direct-http",
-      "detour": "direct"
+      "tag": "direct-http"
     }
   ],
   "route": {
