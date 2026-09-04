@@ -52,8 +52,15 @@
         "action": "predefined"
       },
       {
-        "domain_suffix": [".local", ".lan", "miwifi.com"],
-        "rule_set": ["private", "apple_cn"],
+        "domain_suffix": [
+          ".local",
+          ".lan",
+          "miwifi.com"
+        ],
+        "rule_set": [
+          "private",
+          "apple_cn"
+        ],
         "server": "local"
       },
       {
@@ -78,7 +85,10 @@
         "server": "local"
       },
       {
-        "domain": ["ghfast.top", "cdn.jsdelivr.net"],
+        "domain": [
+          "ghfast.top",
+          "cdn.jsdelivr.net"
+        ],
         "domain_suffix": [
           "tplogin.cn",
           "router.asus.com",
@@ -95,11 +105,17 @@
           "market.xiaomi.com",
           "lancache.steamcontent.com"
         ],
-        "rule_set": ["cn_domain", "microsoft@cn"],
+        "rule_set": [
+          "cn_domain",
+          "microsoft@cn"
+        ],
         "server": "dns_direct"
       },
       {
-        "query_type": ["A", "AAAA"],
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
         "rule_set": "proxy_domain",
         "server": "fakeip"
       },
@@ -115,7 +131,10 @@
         "server": "local"
       },
       {
-        "query_type": ["A", "AAAA"],
+        "query_type": [
+          "A",
+          "AAAA"
+        ],
         "server": "fakeip"
       }
     ]
@@ -129,13 +148,22 @@
   "inbounds": [
     {
       "type": "tun",
-      "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
+      "address": [
+        "172.18.0.1/30",
+        "fdfe:dcba:9876::1/126"
+      ],
       "auto_route": true,
       "strict_route": true,
       "endpoint_independent_nat": true,
-      "route_exclude_address": ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"],
+      "route_exclude_address": [
+        "10.0.0.0/8",
+        "172.16.0.0/12",
+        "192.168.0.0/16"
+      ],
       "stack": "mixed",
-      "loopback_address": ["10.7.0.1"]
+      "loopback_address": [
+        "10.7.0.1"
+      ]
     },
     {
       "type": "mixed",
@@ -156,49 +184,68 @@
       "tag": "🤖 AI",
       "type": "selector",
       "interrupt_exist_connections": true,
-      "outbounds": ["🚀 节点选择", "direct"],
+      "outbounds": [
+        "🚀 节点选择",
+        "direct"
+      ],
       "default": "🚀 节点选择"
     },
     {
       "tag": "💳 PayPal",
       "type": "selector",
       "interrupt_exist_connections": true,
-      "outbounds": ["🚀 节点选择", "direct"],
+      "outbounds": [
+        "🚀 节点选择",
+        "direct"
+      ],
       "default": "🚀 节点选择"
     },
     {
       "type": "selector",
       "tag": "github",
       "interrupt_exist_connections": true,
-      "outbounds": ["🚀 节点选择", "direct"],
+      "outbounds": [
+        "🚀 节点选择",
+        "direct"
+      ],
       "default": "🚀 节点选择"
     },
     {
       "type": "selector",
       "tag": "🪟 microsoft@cn",
       "interrupt_exist_connections": true,
-      "outbounds": ["🚀 节点选择", "direct"],
+      "outbounds": [
+        "🚀 节点选择",
+        "direct"
+      ],
       "default": "direct"
     },
     {
       "tag": "cn",
       "type": "selector",
       "interrupt_exist_connections": true,
-      "outbounds": ["🚀 节点选择", "direct"],
+      "outbounds": [
+        "🚀 节点选择",
+        "direct"
+      ],
       "default": "direct"
     },
     {
       "tag": "♻️ 中转分组",
       "type": "selector",
       "interrupt_exist_connections": true,
-      "outbounds": ["direct"],
+      "outbounds": [
+        "direct"
+      ],
       "default": "direct"
     },
     {
       "tag": "🛬 落地分组",
       "type": "selector",
       "interrupt_exist_connections": true,
-      "outbounds": ["direct"],
+      "outbounds": [
+        "direct"
+      ],
       "default": "direct"
     },
     {
@@ -208,8 +255,7 @@
   ],
   "http_clients": [
     {
-      "tag": "direct-http",
-      "detour": "direct"
+      "tag": "direct-http"
     }
   ],
   "route": {
@@ -366,7 +412,10 @@
       },
       {
         "domain_suffix": "miwifi.com",
-        "rule_set": ["cn_domain", "apple_cn"],
+        "rule_set": [
+          "cn_domain",
+          "apple_cn"
+        ],
         "outbound": "cn"
       }
     ],
